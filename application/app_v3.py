@@ -1,10 +1,10 @@
 """
-Simple rest interface for VariantVlidator built using Flask Flask-RESTPlus and Swagger UI
+Simple rest interface for VariantVlidator built using Flask Flask-RESTX and Swagger UI
 """
 
 # Import modules
 from flask import Flask
-from flask_restplus import Api, Resource
+from flask_restx import Api, Resource
 import _____
 
 # Define the application as a Flask app with the name defined by __name__ (i.e. the name of the current module)
@@ -15,7 +15,7 @@ application = Flask(__name__)
 # Define the API as api
 api = Api(app = application)
 
-# Define a name-space to be read Swagger UI which is built in to Flask-RESTPlus
+# Define a name-space to be read Swagger UI which is built in to Flask-RESTX
 # The first variable is the path of the namespace the second variable describes the space
 hello_space = api.namespace('hello', description='Simple API that returns a greeting')
 @hello_space.route("/")
@@ -39,13 +39,14 @@ vv_space = api.namespace('VariantValidator', description='VariantValidator APIs'
 class VariantValidatorClass(Resource):
     def get(self, _____):
 
-        # Make a request to the curent VariantValidator rest-API
-        url = _____
-        validation = _____
-        content = _____
-        return _____
+        # Make a request to the curent VariantValidator rest-API, # Send an HTTP GET request to the provided URL
+     url = '/'.join(['http://rest.variantvalidator.org/variantvalidator', genome_build, variant_description, select_transcripts])
+        validation = requests.get(url) 
+        content = validation.json() # Assuming the response contains JSON data
+        return content # Return the JSON response
 
-# Allows app to be run in debug mode
+def post(self, url):'http://rest.variantvalidator.org/variantvalidator'
+# Implement the behavior for a POST request to the VariantValidator endpoint, This route can handle HTTP POST requests to the "VariantValidator" endpoint.
 if __name__ == '__main__':
     application.debug = True # Enable debugging mode
-    application.run(host="127.0.0.1", port=5000) # Specify a host and port fot the app
+    application.run(host="127.0.0.1", port=5000) # Specify a host and port for the app
